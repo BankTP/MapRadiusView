@@ -14,7 +14,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
-import th.in.banktp.mapradiusview.MapRadiusView;
+import th.in.banktp.lib.mapradiusview.MapRadiusView;
 
 public class MainActivity extends AppCompatActivity {
 

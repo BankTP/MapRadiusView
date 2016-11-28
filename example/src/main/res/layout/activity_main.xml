@@ -12,7 +12,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="th.in.banktp.mapradius.MainActivity">
 
-    <th.in.banktp.mapradiusview.MapRadiusView
+    <th.in.banktp.lib.mapradiusview.MapRadiusView
         android:id="@+id/mapRadiusView"
         android:layout_width="match_parent"
         android:layout_height="300dp"/>

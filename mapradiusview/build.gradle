@@ -26,3 +26,39 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.0.1'
     compile 'com.google.android.gms:play-services-maps:9.8.0'
 }
+
+
+//install {
+//    repositories.mavenInstaller {
+//        pom.project {
+//            group "th.in.banktp.lib"
+//            artifactId "android-oauth-handler"
+//            version "1.0.0"
+//        }
+//    }
+//}
+//
+//
+//ext {
+//    bintrayRepo = 'maven'
+//    bintrayName = 'mapradiusview'
+//
+//    publishedGroupId = 'th.in.banktp.lib'
+//    libraryName = 'MapRadiusView'
+//    artifact = 'mapradiusview'
+//
+//    libraryDescription = 'Automatically set zoom level based on selected radius that draw over Google Map.'
+//
+//    siteUrl = 'https://github.com/BankTP/MapRadiusView'
+//    gitUrl = 'https://github.com/BankTP/MapRadiusView.git'
+//
+//    libraryVersion = '0.1'
+//
+//    developerId = 'bankTP'
+//    developerName = 'Tanawut Pitchayaboonwong'
+//    developerEmail = 'btanawut@gmail.com'
+//
+//    licenseName = 'MIT'
+//    licenseUrl = 'https://opensource.org/licenses/MIT'
+//    allLicenses = ["MIT"]
+//}
