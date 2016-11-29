@@ -84,7 +84,9 @@ public class MapRadiusView extends FrameLayout {
             public void run() {
                 _minWidth = Math.min(getWidth(), getHeight());
                 _lpRadius = (LayoutParams) _ivRadius.getLayoutParams();
-                setRadius(currentRadius);
+                int initialRadius = currentRadius;
+                currentRadius = 0;
+                setRadius(initialRadius);
             }
         });
     }
@@ -121,7 +123,7 @@ public class MapRadiusView extends FrameLayout {
         radiusMeter *= 2;// make it circle length;
         double metersPerPixel = maxZoomMetersPerPixel;
         int zoomLevel = maxZoom;
-        while ((metersPerPixel * _minWidth) < radiusMeter) {
+        while ((metersPerPixel * _minWidth) < radiusMeter && zoomLevel > 0) {
             metersPerPixel *= 2;
             --zoomLevel;
         }
@@ -142,7 +144,7 @@ public class MapRadiusView extends FrameLayout {
     /**
      * Initialize view
      *
-     * @param fragmentManager
+     * @param fragmentManager support fragment manager
      */
     public void init(FragmentManager fragmentManager) {
         init(fragmentManager, null);
@@ -160,9 +162,9 @@ public class MapRadiusView extends FrameLayout {
     }
 
     /**
-     * @param fragmentManager
-     * @param center
-     * @param radius
+     * @param fragmentManager support fragment manager
+     * @param center          set center of map when map is ready
+     * @param radius          area radius to display over map
      */
     public void init(FragmentManager fragmentManager, final LatLng center, int radius) {
         init(fragmentManager, center, radius, null);
@@ -173,6 +175,7 @@ public class MapRadiusView extends FrameLayout {
      *
      * @param fragmentManager    support fragment manager
      * @param center             set center of map when map is ready
+     * @param radius             area radius to display over map
      * @param onMapReadyCallback on map ready callback
      */
     public void init(FragmentManager fragmentManager, final LatLng center, int radius, final OnMapReadyCallback onMapReadyCallback) {
@@ -189,7 +192,9 @@ public class MapRadiusView extends FrameLayout {
                             onMapReadyCallback.onMapReady(googleMap);
 
                         if (_lpRadius != null && _lpRadius.width == 0) {
-                            setRadius(currentRadius);
+                            int initialRadius = currentRadius;
+                            currentRadius = 0;
+                            setRadius(initialRadius);
                         }
                     }
                 });
@@ -211,7 +216,7 @@ public class MapRadiusView extends FrameLayout {
      * @param meters radius in meter
      */
     public synchronized void setRadius(int meters) {
-        if (_map == null)
+        if (_map == null || meters == currentRadius)
             return;
         this.currentRadius = meters;
         calculateZoomLevelAndMeterPerPixel(currentRadius);

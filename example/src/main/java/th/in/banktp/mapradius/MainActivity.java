@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         final MapRadiusView mapRadiusView = (MapRadiusView) findViewById(R.id.mapRadiusView);
 
-        mapRadiusView.init(getSupportFragmentManager(), new LatLng(18.7650085, 98.9521358), 1);
+        mapRadiusView.init(getSupportFragmentManager(), new LatLng(18.7650085, 98.9521358), 1000);
 
         final SeekBar seekBar = (SeekBar) findViewById(R.id.seekbar);
         final TextView value = (TextView) findViewById(R.id.value);

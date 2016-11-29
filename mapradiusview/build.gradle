@@ -30,22 +30,48 @@ dependencies {
 }
 
 
+group 'th.in.banktp.lib'
+archivesBaseName = 'mapradiusview'
+version '0.1'
 
-archivesBaseName = "mapradiusview"
+def siteUrl = 'https://github.com/BankTP/MapRadiusView'
+def gitUrl = 'https://github.com/BankTP/MapRadiusView.git'
 
 install {
     repositories.mavenInstaller {
         pom.project {
-            group "th.in.banktp.lib"
-            artifactId "mapradiusview"
-            version "0.1"
+            name 'MapRadiusView'
+            scm {
+                connection gitUrl
+                developerConnection gitUrl
+                url siteUrl
+            }
         }
     }
 }
 
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
 bintray {
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
@@ -55,10 +81,8 @@ bintray {
         name = 'mapradiusview'
         userOrg = user
         licenses = ['MIT']
-        vcsUrl = 'https://github.com/BankTP/MapRadiusView.git'
-        version {
-            name = '0.1'
-            desc = 'Automatically set zoom level based on selected radius over Google Map.'
-        }
+        vcsUrl = gitUrl
+        websiteUrl = siteUrl
+        publish = false
     }
 }

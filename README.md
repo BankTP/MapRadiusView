@@ -5,7 +5,7 @@ This library included Google Map so that you have to provide Google Map api to d
 ###Installation
 Gradle
 ```
-compile 'th.in.banktp.lib.mapradiusview:0.1'
+compile 'th.in.banktp.lib:mapradiusview:0.1'
 ```
 
 ###Usage
