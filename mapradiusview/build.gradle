@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 
 android {
     compileSdkVersion 25
@@ -28,37 +30,35 @@ dependencies {
 }
 
 
-//install {
-//    repositories.mavenInstaller {
-//        pom.project {
-//            group "th.in.banktp.lib"
-//            artifactId "android-oauth-handler"
-//            version "1.0.0"
-//        }
-//    }
-//}
-//
-//
-//ext {
-//    bintrayRepo = 'maven'
-//    bintrayName = 'mapradiusview'
-//
-//    publishedGroupId = 'th.in.banktp.lib'
-//    libraryName = 'MapRadiusView'
-//    artifact = 'mapradiusview'
-//
-//    libraryDescription = 'Automatically set zoom level based on selected radius that draw over Google Map.'
-//
-//    siteUrl = 'https://github.com/BankTP/MapRadiusView'
-//    gitUrl = 'https://github.com/BankTP/MapRadiusView.git'
-//
-//    libraryVersion = '0.1'
-//
-//    developerId = 'bankTP'
-//    developerName = 'Tanawut Pitchayaboonwong'
-//    developerEmail = 'btanawut@gmail.com'
-//
-//    licenseName = 'MIT'
-//    licenseUrl = 'https://opensource.org/licenses/MIT'
-//    allLicenses = ["MIT"]
-//}
+
+archivesBaseName = "mapradiusview"
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            group "th.in.banktp.lib"
+            artifactId "mapradiusview"
+            version "0.1"
+        }
+    }
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+    configurations = ['archives']
+    pkg {
+        repo = 'maven'
+        name = 'mapradiusview'
+        userOrg = user
+        licenses = ['MIT']
+        vcsUrl = 'https://github.com/BankTP/MapRadiusView.git'
+        version {
+            name = '0.1'
+            desc = 'Automatically set zoom level based on selected radius over Google Map.'
+        }
+    }
+}
